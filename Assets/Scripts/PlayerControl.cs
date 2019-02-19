@@ -10,6 +10,11 @@ public class PlayerControl : MonoBehaviour {
     private Rigidbody RB;
     private GameManager GM;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject); 
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -17,13 +22,18 @@ public class PlayerControl : MonoBehaviour {
         RB = GetComponent<Rigidbody>();
     }
 
+    private void Update()
+    {
+    }
+
 
     void FixedUpdate()
     {
+        
         float foreAndAft = Input.GetAxis("Vertical") * speed;
-        float rotation = Input.GetAxis("Horizontal") * rotatinSpeed;
+        float rotation2 = Input.GetAxis("Horizontal") * rotatinSpeed;
         RB.AddRelativeForce(0, 0, foreAndAft);
-        RB.AddTorque(0, rotation, 0);
+        RB.AddTorque(0, rotation2, 0);
 
     }
 }
