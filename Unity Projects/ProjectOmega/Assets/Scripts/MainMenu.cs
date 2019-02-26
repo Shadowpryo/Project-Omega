@@ -18,8 +18,6 @@ public class MainMenu : MonoBehaviour {
     //Funct to start new game
     public void newGame()
     {
-        //Debug to make sure it's clicking
-        Debug.Log("Start a new game");
         //Actually loads the next scene
         SceneManager.LoadScene("CharacterSelect");
     }
@@ -38,8 +36,6 @@ public class MainMenu : MonoBehaviour {
     //Funct to quit game
     public void Quit()
     {
-        //Debug to make sure it's clicking
-        Debug.Log("Quit game");
         //Quits the application
         Application.Quit();
     }
@@ -79,7 +75,6 @@ public class MainMenu : MonoBehaviour {
 
     public void Begin()
     {
-        Debug.Log("Starting the game!");
         SceneManager.LoadScene("Hub01");
     }
 
@@ -94,11 +89,15 @@ public class MainMenu : MonoBehaviour {
             {
                 GameObject ply = (GameObject)Instantiate(GM.playerE, spawn, Quaternion.Euler(new Vector3(0,180,0)));
                 ply.name = "Player";
+                ply.GetComponentInChildren<Camera>().gameObject.SetActive(false);
+                GM.PC = GameObject.Find("Player").GetComponent<PlayerControl>();
             }
             else
             {
                 GameObject ply = (GameObject)Instantiate(GM.playerD, spawn, Quaternion.Euler(new Vector3(0, 180, 0)));
                 ply.name = "Player";
+                ply.GetComponentInChildren<Camera>().gameObject.SetActive(false);
+                GM.PC = GameObject.Find("Player").GetComponent<PlayerControl>();
             }
         }
     }

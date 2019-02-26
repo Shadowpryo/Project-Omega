@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour {
     public Vector3 PSH01;
     public GameObject playerD;
     public GameObject playerE;
-    public Camera camera;
+    public int money;
+    public PlayerControl PC;
     public bool enlisted;
+    public bool inGame = false;
     // Called after everything in the scene is loaded, only gets called once in it's life time
     void Awake()
     {
@@ -23,12 +25,20 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        /*if(PC == null)
+        {
+            PC = GameObject.Find("Player").GetComponent<PlayerControl>();
+        }*/
 	}
 
     //Here is where we'll handle all menu items
     private void OnGUI()
     {
+        if (inGame)
+        {
+            GUI.Box(new Rect(10, 10, 120, 25),
+                string.Format("HP/MaxHP: " + PC.hp + "/" + PC.MaxHP));
+        }
     }
 
     private void OnLevelWasLoaded(int level)
@@ -36,21 +46,27 @@ public class GameManager : MonoBehaviour {
         if(level == 3)
         {
             PSH01 = GameObject.Find("playerSpawn").transform.position;
+            GameObject player = GameObject.Find("Player");
+            player.transform.position = PSH01;
+            PlayerControl pc = player.GetComponent<PlayerControl>();
+            pc.cam.gameObject.SetActive(true);
+            pc.canMove = true;
+            inGame = true;
             if (enlisted)
             {
-                GameObject ply = (GameObject)Instantiate(playerE, PSH01, Quaternion.identity);
-                Camera cam = (Camera)Instantiate(camera, PSH01, Quaternion.identity);
-                cam.name = "Main Camera";
-                ply.name = "Player";
-                cam.transform.parent = ply.transform;
+                //GameObject ply = (GameObject)Instantiate(playerE, PSH01, Quaternion.identity);
+                //Camera cam = (Camera)Instantiate(camera, PSH01, Quaternion.identity);
+                //cam.name = "Main Camera";
+                //ply.name = "Player";
+                //cam.transform.parent = ply.transform;
             }
             else
             {
-                GameObject ply = (GameObject)Instantiate(playerD, PSH01, Quaternion.identity);
-                Camera cam = (Camera)Instantiate(camera, PSH01, Quaternion.identity);
-                cam.name = "Main Camera";
-                ply.name = "Player";
-                cam.transform.parent = ply.transform;
+                //GameObject ply = (GameObject)Instantiate(playerD, PSH01, Quaternion.identity);
+                //Camera cam = (Camera)Instantiate(camera, PSH01, Quaternion.identity);
+                //cam.name = "Main Camera";
+                //ply.name = "Player";
+                //cam.transform.parent = ply.transform;
             }
         }
     }
