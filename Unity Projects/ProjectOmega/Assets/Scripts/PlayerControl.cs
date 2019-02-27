@@ -12,11 +12,13 @@ public class PlayerControl : MonoBehaviour {
     public Transform relativeTransform;
     public bool canMove;
     public bool inMenu;
+    //public string name;
     
     //basic stats
     public int MaxHP;
     public int hp;
     public int str;
+    public int strMod;
     public int def;
     public int MaxEXP;
     public int EXP;
@@ -42,6 +44,7 @@ public class PlayerControl : MonoBehaviour {
         hp = MaxHP;
         EXP = 0;
         Level = 1;
+        name = gameObject.name;
     }
 
     private void Update()
@@ -55,10 +58,64 @@ public class PlayerControl : MonoBehaviour {
             statPoints += 3;
             Level++;
         }
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (GM.inGame)
         {
-            inMenu = !inMenu;
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                inMenu = !inMenu;
+            }
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Weapons weapon = GameObject.Find("Cleaver").GetComponent<Weapons>();
+                Animator anim = GameObject.Find("Cleaver").GetComponent<Animator>();
+                if(weapon.owner == gameObject && anim.GetBool("attacking")==false)
+                    anim.SetBool("attacking", true);
+                /*RaycastHit hit;
+
+                Vector3 fwd = relativeTransform.forward;
+                Debug.DrawRay(transform.position, fwd * 10, Color.red);
+                if (Physics.Raycast(transform.position, fwd, out hit, 10))
+                {
+                    switch (hit.collider.gameObject.layer)
+                    {
+                        case 8:
+                            EnemyAI EA = hit.transform.GetComponent<EnemyAI>();
+                            int damage = Mathf.RoundToInt(str + strMod / EA.def);
+                            EA.HP -= damage;
+                            Debug.Log("Damage done is: " + damage);
+                            break;
+                    }
+                }*/
+            }
+            if (Input.GetButtonUp("Fire1"))
+            {
+                Weapons weapon = GameObject.Find("Cleaver").GetComponent<Weapons>();
+                Animator anim = GameObject.Find("Cleaver").GetComponent<Animator>();
+                if (weapon.owner == gameObject && anim.GetBool("attacking") == true)
+                    anim.SetBool("attacking", false);
+                /*RaycastHit hit;
+
+                Vector3 fwd = relativeTransform.forward;
+                Debug.DrawRay(transform.position, fwd * 10, Color.red);
+                if (Physics.Raycast(transform.position, fwd, out hit, 10))
+                {
+                    switch (hit.collider.gameObject.layer)
+                    {
+                        case 8:
+                            EnemyAI EA = hit.transform.GetComponent<EnemyAI>();
+                            int damage = Mathf.RoundToInt(str + strMod / EA.def);
+                            EA.HP -= damage;
+                            Debug.Log("Damage done is: " + damage);
+                            break;
+                    }
+                }*/
+            }
         }
+        
+    }
+
+    private void FixedUpdate()
+    {
         if (canMove)
         {
             Vector3 moveDirection = Vector3.zero;
@@ -73,27 +130,6 @@ public class PlayerControl : MonoBehaviour {
 
             if (moveDirection != Vector3.zero)
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(moveDirection), rotatinSpeed * Time.deltaTime);
-
-            if (Input.GetButtonDown("Fire1"))
-            {
-
-                RaycastHit hit;
-
-                Vector3 fwd = relativeTransform.forward;
-                Debug.DrawRay(transform.position, fwd * 10, Color.red);
-                if (Physics.Raycast(transform.position, fwd, out hit, 10))
-                {
-                    switch (hit.collider.gameObject.layer)
-                    {
-                        case 8:
-                            EnemyAI EA = hit.transform.GetComponent<EnemyAI>();
-                            int damage = Mathf.RoundToInt(str / EA.def);
-                            EA.HP -= damage;
-                            Debug.Log("Damage done is: " + damage);
-                            break;
-                    }
-                }
-            }
         }
     }
 
@@ -103,11 +139,15 @@ public class PlayerControl : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Weapons cleaver = other.GetComponentInParent<Weapons>();
+                Weapons weapon = other.GetComponentInParent<Weapons>();
                 other.gameObject.SetActive(false);
-                other.GetComponentInParent<Transform>().parent = gameObject.transform;
-                other.GetComponentInParent<Transform>().gameObject.SetActive(false);
-                str += cleaver.str;
+                //other.GetComponentInParent<Transform>().parent = gameObject.transform;
+                //other.GetComponentInParent<Transform>().SetParent(cam.transform);
+                //other.GetComponentInParent<Transform>().SetParent(cam.transform,false);
+                //other.GetComponentInParent<Transform>().gameObject.SetActive(false);
+                strMod += weapon.str;
+                weapon.owner = gameObject;
+                Destroy(other.gameObject);
 
             }
         }

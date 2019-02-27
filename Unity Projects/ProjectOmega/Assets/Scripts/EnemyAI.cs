@@ -8,7 +8,6 @@ public class EnemyAI : MonoBehaviour
     public GameObject player;
     public PlayerControl PC;
     public NavMeshAgent agent;
-    //public GameObject coin;
     public GameManager GM;
     public int MaxHP;
     public int HP;
@@ -51,7 +50,6 @@ public class EnemyAI : MonoBehaviour
         else
         {
             PC.EXP += 3;
-            //Instantiate(GM.money, transform.position, Quaternion.identity); will be made to code in droppable loot
             Destroy(gameObject);
         }
     }
