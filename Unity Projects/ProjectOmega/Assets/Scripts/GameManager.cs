@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
     public PlayerControl PC;
     public bool enlisted;
     public bool inGame = false;
+
+
     // Called after everything in the scene is loaded, only gets called once in it's life time
     void Awake()
     {
@@ -21,14 +23,6 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         enlisted = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        /*if(PC == null)
-        {
-            PC = GameObject.Find("Player").GetComponent<PlayerControl>();
-        }*/
 	}
 
     //Here is where we'll handle all menu items
@@ -52,22 +46,6 @@ public class GameManager : MonoBehaviour {
             pc.cam.gameObject.SetActive(true);
             pc.canMove = true;
             inGame = true;
-            if (enlisted)
-            {
-                //GameObject ply = (GameObject)Instantiate(playerE, PSH01, Quaternion.identity);
-                //Camera cam = (Camera)Instantiate(camera, PSH01, Quaternion.identity);
-                //cam.name = "Main Camera";
-                //ply.name = "Player";
-                //cam.transform.parent = ply.transform;
-            }
-            else
-            {
-                //GameObject ply = (GameObject)Instantiate(playerD, PSH01, Quaternion.identity);
-                //Camera cam = (Camera)Instantiate(camera, PSH01, Quaternion.identity);
-                //cam.name = "Main Camera";
-                //ply.name = "Player";
-                //cam.transform.parent = ply.transform;
-            }
         }
     }
 }
