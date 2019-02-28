@@ -142,7 +142,7 @@ public class PlayerControl : MonoBehaviour {
                 Weapons weapon = other.GetComponentInParent<Weapons>();
                 other.gameObject.SetActive(false);
                 //other.GetComponentInParent<Transform>().parent = gameObject.transform;
-                //other.GetComponentInParent<Transform>().SetParent(cam.transform);
+                other.GetComponentInParent<Transform>().SetParent(cam.transform);
                 //other.GetComponentInParent<Transform>().SetParent(cam.transform,false);
                 //other.GetComponentInParent<Transform>().gameObject.SetActive(false);
                 strMod += weapon.str;
