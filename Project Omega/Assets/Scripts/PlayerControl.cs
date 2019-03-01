@@ -89,11 +89,11 @@ public class PlayerControl : MonoBehaviour {
             }
             if (Input.GetButtonUp("Fire1"))
             {
-                Weapons weapon = GameObject.Find("Cleaver").GetComponent<Weapons>();
+                /*Weapons weapon = GameObject.Find("Cleaver").GetComponent<Weapons>();
                 Animator anim = GameObject.Find("Cleaver").GetComponent<Animator>();
                 if (weapon.owner == gameObject && anim.GetBool("attacking") == true)
-                    anim.SetBool("attacking", false);
-                /*RaycastHit hit;
+                    anim.SetBool("attacking", false);*/
+                RaycastHit hit;
 
                 Vector3 fwd = relativeTransform.forward;
                 Debug.DrawRay(transform.position, fwd * 10, Color.red);
@@ -108,7 +108,7 @@ public class PlayerControl : MonoBehaviour {
                             Debug.Log("Damage done is: " + damage);
                             break;
                     }
-                }*/
+                }
             }
         }
         
@@ -141,13 +141,12 @@ public class PlayerControl : MonoBehaviour {
             {
                 Weapons weapon = other.GetComponentInParent<Weapons>();
                 other.gameObject.SetActive(false);
-                //other.GetComponentInParent<Transform>().parent = gameObject.transform;
-                other.GetComponentInParent<Transform>().SetParent(cam.transform);
-                //other.GetComponentInParent<Transform>().SetParent(cam.transform,false);
-                //other.GetComponentInParent<Transform>().gameObject.SetActive(false);
+                weapon.transform.parent = cam.transform;
+                //weapon.transform.Rotate(0, 90, 0);
+                weapon.gameObject.SetActive(false);
                 strMod += weapon.str;
                 weapon.owner = gameObject;
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
 
             }
         }
