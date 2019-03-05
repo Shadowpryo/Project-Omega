@@ -12,6 +12,7 @@ public class PlayerControl : MonoBehaviour {
     public Transform relativeTransform;
     public bool canMove;
     public bool inMenu;
+    public Animator anim;
     //public string name;
     
     //basic stats
@@ -45,6 +46,7 @@ public class PlayerControl : MonoBehaviour {
         EXP = 0;
         Level = 1;
         name = gameObject.name;
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -66,10 +68,7 @@ public class PlayerControl : MonoBehaviour {
             }
             if (Input.GetButtonDown("Fire1"))
             {
-                Weapons weapon = GameObject.Find("Cleaver").GetComponent<Weapons>();
-                Animator anim = GameObject.Find("Cleaver").GetComponent<Animator>();
-                if(weapon.owner == gameObject && anim.GetBool("attacking")==false)
-                    anim.SetBool("attacking", true);
+                anim.SetBool("isAttacking", true);
                 /*RaycastHit hit;
 
                 Vector3 fwd = relativeTransform.forward;
@@ -89,10 +88,9 @@ public class PlayerControl : MonoBehaviour {
             }
             if (Input.GetButtonUp("Fire1"))
             {
-                /*Weapons weapon = GameObject.Find("Cleaver").GetComponent<Weapons>();
-                Animator anim = GameObject.Find("Cleaver").GetComponent<Animator>();
-                if (weapon.owner == gameObject && anim.GetBool("attacking") == true)
-                    anim.SetBool("attacking", false);*/
+                anim.SetBool("isAttacking", false);
+
+                /*
                 RaycastHit hit;
 
                 Vector3 fwd = relativeTransform.forward;
@@ -108,7 +106,7 @@ public class PlayerControl : MonoBehaviour {
                             Debug.Log("Damage done is: " + damage);
                             break;
                     }
-                }
+                }*/
             }
         }
         
@@ -127,9 +125,13 @@ public class PlayerControl : MonoBehaviour {
             moveDirection.y = 0f;
 
             transform.position += moveDirection.normalized * speed * Time.deltaTime;
+            anim.SetFloat("walking", -1);
 
             if (moveDirection != Vector3.zero)
+            {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(moveDirection), rotatinSpeed * Time.deltaTime);
+                anim.SetFloat("walking", 1);
+            }
         }
     }
 
@@ -140,10 +142,14 @@ public class PlayerControl : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Weapons weapon = other.GetComponentInParent<Weapons>();
+                Transform hand = GameObject.Find("mixamorig:RightHandIndex1").GetComponent<Transform>();
                 other.gameObject.SetActive(false);
-                weapon.transform.parent = cam.transform;
-                //weapon.transform.Rotate(0, 90, 0);
-                weapon.gameObject.SetActive(false);
+                weapon.transform.parent = hand.transform;
+                weapon.transform.position = new Vector3(hand.position.x, hand.position.y, hand.position.z+.3f);
+                //weapon.transform.position = new Vector3(-.104f, -.035f, -.413f);
+                weapon.transform.Rotate(new Vector3(90, 35, 0));
+                //weapon.transform.Rotate(-90, 0, 0);
+                //weapon.gameObject.SetActive(false);
                 strMod += weapon.str;
                 weapon.owner = gameObject;
                 //Destroy(other.gameObject);
