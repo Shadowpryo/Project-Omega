@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Weapons.cs" />
+     <Compile Include="Assets\Scripts\thirdPersonCam.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>A:/Unity 5.6.6/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
