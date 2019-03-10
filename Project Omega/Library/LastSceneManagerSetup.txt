@@ -1,1 +1,8 @@
+<<<<<<< HEAD
 sceneSetups: []
+=======
+sceneSetups:
+- path: Assets/Scenes/The_Academy.unity
+  isLoaded: 1
+  isActive: 1
+>>>>>>> c02cef32aa3f44c691795c8be2163fa6d3c749d3

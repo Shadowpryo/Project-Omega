@@ -8,10 +8,12 @@ public class GameManager : MonoBehaviour {
     public Vector3 PSH01;
     public GameObject playerD;
     public GameObject playerE;
+    public GameObject[] cams;
     public int money;
     public PlayerControl PC;
     public bool enlisted;
     public bool inGame = false;
+    public bool TPC = false;
 
 
     // Called after everything in the scene is loaded, only gets called once in it's life time
@@ -24,6 +26,40 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         enlisted = false;
 	}
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            foreach (GameObject c in cams)
+            {
+                if (TPC == false)
+                {
+                    if (c.name == "thirdPCam")
+                    {
+                        c.gameObject.SetActive(true);
+                        TPC = true;
+                    }
+                    else
+                    {
+                        c.gameObject.SetActive(false);
+                    }
+                }
+                else
+                {
+                    if (c.name == "firstPCam")
+                    {
+                        c.gameObject.SetActive(true);
+                        TPC = true;
+                    }
+                    else
+                    {
+                        c.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
+    }
 
     //Here is where we'll handle all menu items
     private void OnGUI()
