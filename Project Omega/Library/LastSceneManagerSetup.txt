@@ -1,8 +1,1 @@
-sceneSetups:
-<<<<<<< Updated upstream
-- path: Assets/Scenes/The_Academy.unity
-=======
-- path: Assets/Scenes/MainMenu.unity
->>>>>>> Stashed changes
-  isLoaded: 1
-  isActive: 1
+sceneSetups: []
