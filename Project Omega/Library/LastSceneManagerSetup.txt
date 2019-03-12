@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/The_Academy.unity
+- path: Assets/Scenes/Region1.unity
   isLoaded: 1
   isActive: 1
