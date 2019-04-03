@@ -97,14 +97,15 @@
     <Compile Include="Assets\Scripts\CameraControl.cs" />
     <Compile Include="Assets\Scripts\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\LoadingMenu.cs" />
-    <Compile Include="Assets\Scripts\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
-    <Compile Include="Assets\Scripts\QuitGame.cs" />
-    <Compile Include="Assets\Scripts\SettingsMenu.cs" />
     <Compile Include="Assets\Scripts\Weapons.cs" />
     <Compile Include="Assets\Scripts\thirdPersonCam.cs" />
+    <Compile Include="Assets\TANNER&apos;S_SCRIPTS_&amp;_SCENES\Scipts\LoadingMenu.cs" />
+    <Compile Include="Assets\TANNER&apos;S_SCRIPTS_&amp;_SCENES\Scipts\MainMenu.cs" />
+    <Compile Include="Assets\TANNER&apos;S_SCRIPTS_&amp;_SCENES\Scipts\PauseMenu.cs" />
+    <Compile Include="Assets\TANNER&apos;S_SCRIPTS_&amp;_SCENES\Scipts\QuitGame.cs" />
+    <Compile Include="Assets\TANNER&apos;S_SCRIPTS_&amp;_SCENES\Scipts\SettingsMenu.cs" />
+    <Compile Include="Assets\TANNER&apos;S_SCRIPTS_&amp;_SCENES\Scipts\Test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
